@@ -51,11 +51,6 @@ bintray {
     dryRun = false
     publish = true
 
-    filesSpec {
-        from 'build/libs'
-        into '.'
-    }
-
     pkg {
         repo = 'maven'
         name = PROJ_NAME
