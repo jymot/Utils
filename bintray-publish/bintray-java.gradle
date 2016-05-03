@@ -6,6 +6,15 @@ project.archivesBaseName = PROJ_ARTIFACTID
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
+task sourcesJar(type: Jar) {
+    from 'build/classes/'
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}
+
 install {
     repositories.mavenInstaller {
         pom.project {
