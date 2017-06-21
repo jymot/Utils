@@ -7,4 +7,4 @@
  5. 执行 `launchctl load -w xxx.xxx.xxx.plist` 即可
  6. 查看是否已经执行任务 `launchctl list | grep 'xxx.xxx.xxx.plist'`
 
-说明[博客](https://wangchao.im/2017/06/20/easyhosts-config-schedule-upgrade/)
+详细说明[博客](https://wangchao.im/2017/06/20/easyhosts-config-schedule-upgrade/)
