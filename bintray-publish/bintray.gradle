@@ -57,27 +57,27 @@ if (JavaVersion.current().isJava8Compatible()) {
 //    from javadoc.destinationDir
 //}
 
-javadoc {
-    options{
-        encoding "UTF-8"
-        charSet 'UTF-8'
-        author true
-        version true
-        links "http://docs.oracle.com/javase/7/docs/api"
-        title PROJ_ARTIFACTID
-    }
-}
+//javadoc {
+//    options{
+//        encoding "UTF-8"
+//        charSet 'UTF-8'
+//        author true
+//        version true
+//        links "http://docs.oracle.com/javase/7/docs/api"
+//        title PROJ_ARTIFACTID
+//    }
+//}
 
-  artifacts {
-    if (project.getPlugins().hasPlugin('com.android.application') ||
-        project.getPlugins().hasPlugin('com.android.library')) {
-      archives androidSourcesJar
-      archives androidJavadocsJar
-    } else {
-      archives sourcesJar
-      archives javadocJar
-    }
+artifacts {
+  if (project.getPlugins().hasPlugin('com.android.application') ||
+      project.getPlugins().hasPlugin('com.android.library')) {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+  } else {
+    archives sourcesJar
+    archives javadocJar
   }
+}
 
 install {
     repositories.mavenInstaller {
