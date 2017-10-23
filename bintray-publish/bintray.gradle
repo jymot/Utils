@@ -14,6 +14,13 @@ if (project.getPlugins().hasPlugin('com.android.application') ||
 
    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
      classifier = 'javadoc'
+     options.encoding = 'UTF-8'
+     options.charSet = 'UTF-8'
+     options.author = true
+     options.version = true
+     options.links = "http://docs.oracle.com/javase/7/docs/api"
+     options.title = PROJ_ARTIFACTID
+
      from androidJavadocs.destinationDir
    }
 
@@ -29,6 +36,13 @@ if (project.getPlugins().hasPlugin('com.android.application') ||
 
    task javadocJar(type: Jar, dependsOn:javadoc) {
      classifier = 'javadoc'
+     options.encoding = 'UTF-8'
+     options.charSet = 'UTF-8'
+     options.author = true
+     options.version = true
+     options.links = "http://docs.oracle.com/javase/7/docs/api"
+     options.title = PROJ_ARTIFACTID
+
      from javadoc.destinationDir
    }
  }
