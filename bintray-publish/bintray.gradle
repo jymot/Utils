@@ -1,3 +1,4 @@
+
 group = PROJ_GROUP
 version = PROJ_VERSION
 project.archivesBaseName = PROJ_ARTIFACTID
@@ -6,53 +7,57 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 if (project.getPlugins().hasPlugin('com.android.application') ||
-     project.getPlugins().hasPlugin('com.android.library')) {
-   task androidJavadocs(type: Javadoc) {
-     source = android.sourceSets.main.java.source
-     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-   }
+        project.getPlugins().hasPlugin('com.android.library')) {
+    task androidJavadocs(type: Javadoc) {
+        source = android.sourceSets.main.java.source
+        options {
+            author true
+            version true
+            encoding 'UTF-8'
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+            title PROJ_ARTIFACTID
+        }
 
-   task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-     classifier = 'javadoc'
-     options.encoding = 'UTF-8'
-     options.charSet = 'UTF-8'
-     options.author = true
-     options.version = true
-     options.links = "http://docs.oracle.com/javase/7/docs/api"
-     options.title = PROJ_ARTIFACTID
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
 
-     from androidJavadocs.destinationDir
-   }
+    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }
 
-   task androidSourcesJar(type: Jar) {
-     classifier = 'sources'
-     from android.sourceSets.main.java.source
-   }
- } else {
-   task sourcesJar(type: Jar, dependsOn:classes) {
-     classifier = 'sources'
-     from sourceSets.main.allSource
-   }
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.source
+    }
+} else {
+    task sourcesJar(type: Jar, dependsOn:classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
 
-   task javadocJar(type: Jar, dependsOn:javadoc) {
-     classifier = 'javadoc'
-     options.encoding = 'UTF-8'
-     options.charSet = 'UTF-8'
-     options.author = true
-     options.version = true
-     options.links = "http://docs.oracle.com/javase/7/docs/api"
-     options.title = PROJ_ARTIFACTID
+    task javadocJar(type: Jar, dependsOn:javadoc) {
+        classifier = 'javadoc'
+        options {
+            author true
+            version true
+            encoding 'UTF-8'
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+            title PROJ_ARTIFACTID
+        }
 
-     from javadoc.destinationDir
-   }
- }
+        from javadoc.destinationDir
+    }
+}
 
 if (JavaVersion.current().isJava8Compatible()) {
-  allprojects {
-    tasks.withType(Javadoc) {
-      options.addStringOption('Xdoclint:none', '-quiet')
+    allprojects {
+        tasks.withType(Javadoc) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+        }
     }
-  }
 }
 
 //task sourcesJar(type: Jar) {
@@ -83,14 +88,14 @@ if (JavaVersion.current().isJava8Compatible()) {
 //}
 
 artifacts {
-  if (project.getPlugins().hasPlugin('com.android.application') ||
-      project.getPlugins().hasPlugin('com.android.library')) {
-    archives androidSourcesJar
-    archives androidJavadocsJar
-  } else {
-    archives sourcesJar
-    archives javadocJar
-  }
+    if (project.getPlugins().hasPlugin('com.android.application') ||
+            project.getPlugins().hasPlugin('com.android.library')) {
+        archives androidSourcesJar
+        archives androidJavadocsJar
+    } else {
+        archives sourcesJar
+        archives javadocJar
+    }
 }
 
 install {
